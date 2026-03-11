@@ -1,0 +1,25 @@
+Window.SetBackgroundTopColor(0.0, 0.0, 0.0);
+Window.SetBackgroundBottomColor(0.0, 0.0, 0.0);
+
+screen_width = Window.GetWidth();
+screen_height = Window.GetHeight();
+
+for (i = 1; i <= 241; i++) {
+    num = i;
+    if (num < 10) { pad = "000"; }
+    else if (num < 100) { pad = "00"; }
+    else { pad = "0"; }
+    frames[i] = Image("frame" + pad + num + ".png");
+}
+
+current_frame = 1;
+logo = Sprite();
+logo.SetX(screen_width / 2 - frames[1].GetWidth() / 2);
+logo.SetY(screen_height / 2 - frames[1].GetHeight() / 2);
+logo.SetImage(frames[1]);
+
+fun refresh_callback() {
+    logo.SetImage(frames[current_frame]);
+    if (current_frame < 241) { current_frame++; }
+}
+Plymouth.SetRefreshFunction(refresh_callback);
